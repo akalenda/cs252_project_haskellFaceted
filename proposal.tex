@@ -1,0 +1,125 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{lipsum}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[noadjust]{cite}
+\usepackage{authblk}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{fancyhdr}
+%
+\pagestyle{fancy}
+%
+\renewenvironment{abstract}{%
+	\hfill\begin{minipage}{0.95\textwidth}
+		\rule{\textwidth}{1pt}}
+	{\par\noindent\rule{\textwidth}{1pt}\end{minipage}}
+%
+\makeatletter
+\renewcommand\@maketitle{%
+	\hfill
+	\begin{minipage}{0.95\textwidth}
+		\vskip 2em
+		\let\footnote\thanks 
+		{\LARGE \@title \par }
+		\vskip 1.5em
+		{\large \@author \par}
+	\end{minipage}
+	\vskip 1em \par
+}
+\makeatother
+
+
+%
+\begin{document}
+	%
+	%title and author details
+	\title{CS 252 Project Proposal}
+	\author[1]{Andrew Kalenda\thanks{andrew.kalenda@sjsu.edu}}
+	\affil[1]{Department of Computer Science, San Jos\'{e} State University}
+	%
+	\maketitle
+	%
+	\begin{abstract}
+		\textit{Faceted values} are a cyber-security technique that provide different views of data depending on the observer, ensuring privacy where needed and protecting data from mischievous third-party programs. Currently, more compelling examples of this technique are needed; to this end, a Haskell faceted values library has been created. The intent of this project is to give a concrete implementation of the library and demonstrate faceted values' efficacy in a strongly, statically typed language.
+	\end{abstract}
+	
+	\section{Introduction}
+		\textit{Information flow controls}\cite{DenningDenning1977} are cyber-security mechanisms by which in-the-wild programs may confine classified data to safe channels, so that sensitive information cannot leak. (In particular, cannot leak to third-party programs.) Historically, information flow control has been a consideration of the individual software developer, but tracking the flow of information is (especially in the untamed wilds of web development) prohibitively difficult and tedious. Even a mindful developer is hard-pressed to allocate precious time and energy when other concerns are mounting. Thus the birth of programmatic controls that will relieve the burden.
+		
+		\textit{Secure multi-execution}\cite{DevriesePiessens2010, JaskelioffRusso2012, RafnssonSabelfeld2013} is one such control mechanism. It splits program execution into two paths: \textit{high} and \textit{low}. A datum's life begins on the \textit{low} path. On \textit{low}, data may be written to any output, public or private. However, when a datum becomes determined by classified information, it is permanently elevated to the \textit{high} path. This elevation can either occur as the datum is determined directly (an \textit{explicit flow} of information) or indirectly (an \textit{implicit flow} of information). The \textit{high} execution path has its output restricted to authorized channels, thus preserving the sanctity of data. 
+		
+		Another mechanism, \textit{faceted values}\cite{AustinFlanagan2012}, simulates secure multi-execution in a single process. A faceted value is a monad containing a private and public value - the facets - which express respective views of a datum depending on the observer. To an unprivileged accessor, the true (private) value is obscured; thus, \textit{high} and \textit{low} execution paths are largely unnecessary. 
+		
+		Compelling examples of faceted values in action are needed, particularly in a strongly and statically typed language. To this end, a Haskell library has been created.\cite{AustinKnowlesFlanagan2014} It is the purpose of this project to put said library into action and demonstrate (un)classified data as viewed from authorized and unauthorized perspectives.
+	
+	\section{Information Flow Controls}
+		Pending
+		
+	\section{Secure multi-execution}
+		Pending
+	
+	\section{Faceted values}
+		Pending
+	
+	\section{\textit{Haskell-Faceted} Library}
+		Pending
+	
+	\section{Tentative Work Schedule}
+	\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{c   lc}
+			\hline \textbf{Date} & \textbf{Tasks accomplished} \\ 
+			\hline \textit{10/12} & Read all papers, include personal digests in project description \\ 
+			\hline \textit{10/19} & \shortstack[l]{\\\\
+				Basic Haskell use case, command line, prompts for (non)sensitive info, then prompts \\
+				for (un)privileged user login, displays view of data} \\ 
+			\hline \textit{10/26} & Get Haskell web framework serving pages \\
+			\hline \textit{11/02} & Add authentication layer \\ 
+			\hline \textit{11/09} & Web form equivalent of week of 10/19 \\ 
+			\hline \textit{11/16} & Faceted values in persistence database \\ 
+			\hline \textit{11/23} & TBD \\ 
+			\hline \textit{11/30} & TBD \\ 
+			\hline \textit{12/07} & TBD \\ 
+			\hline 
+		\end{tabular} 
+	
+	\begin{thebibliography}{9}
+		
+		\bibitem{AustinFlanagan2009}
+		Austin, T. H., \& Flanagan, C. (2009). 
+		\textit{Efficient purely-dynamic information flow analysis. }
+		ACM Sigplan Notices, 44(8), 20-31.
+		
+		\bibitem{AustinFlanagan2012}
+		Austin, T. H., \& Flanagan, C. (2012). 
+		\textit{Multiple facets for dynamic information flow. }
+		ACM SIGPLAN Notices, 47(1), 165-178.
+		
+		\bibitem{AustinKnowlesFlanagan2014}
+		Austin T.H., Knowles K. \& Flanagan C. (2014).
+		\textit{Typed Faceted Values for Secure Information Flow in Haskell.}
+		???\footnote{TODO: Find out what to put in here!}.
+		
+		\bibitem{DenningDenning1977}
+		Denning, D. E., \& Denning, P. J. (1977). 
+		\textit{Certification of programs for secure information flow. }
+		Communications of the ACM, 20(7), 504-513.
+		
+		\bibitem{DevriesePiessens2010}
+		Devriese, D., \& Piessens, F. (2010, May). 
+		\textit{Noninterference through secure multi-execution. }
+		In Security and Privacy (SP), 2010 IEEE Symposium on (pp. 109-124). IEEE.
+		
+		\bibitem{JaskelioffRusso2012}
+		Jaskelioff, M., \& Russo, A. (2012). 
+		\textit{Secure multi-execution in haskell. }
+		In Perspectives of Systems Informatics (pp. 170-178). Springer Berlin Heidelberg.
+		
+		\bibitem{RafnssonSabelfeld2013}
+		Rafnsson, W., \& Sabelfeld, A. (2013, June). 
+		\textit{Secure multi-execution: fine-grained, declassification-aware, and transparent. }
+		In Computer Security Foundations Symposium (CSF), 2013 IEEE 26th (pp. 33-48). IEEE.
+		
+	\end{thebibliography}
+	
+\end{document}
+
